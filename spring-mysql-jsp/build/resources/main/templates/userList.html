@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous" />
+<meta charset="UTF-8" />
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+
+<title>User List</title>
+</head>
+<body>
+	<div class="container">
+		<h1>Users List</h1>
+		<table class="table table-striped table-hover ">
+			<tr class="info">
+				<th>Id</th>
+				<th>Name</th>
+				<th>Phone Number</th>
+				<th>Age</th>
+				<th>Email</th>
+				<th>Country</th>
+				<th>Delete</th>
+				<th>Edit</th>
+			</tr>
+
+			<tr th:each="user : ${users}">
+				<td th:text="${user.id}">Id</td>
+				<td th:text="${user.name}">nombre</td>
+				<td th:text="${user.phoneNumber}">numero</td>
+				<td th:text="${user.age}">Edad</td>
+				<td th:text="${user.email}">Email</td>
+				<td th:text="${user.country.name}">pais</td>
+				<td><a class="btn btn-danger"
+					th:href="@{/userList/deleteUser/{id} (id=${user.id})}"
+					onclick="return confirm('Are you sure?')" id="delete">Delete</a></td>
+				<td><a class="btn btn-info"
+					th:href="@{/userList/updateUser/{id} (id=${user.id})}">Edit </a></td>
+			</tr>
+		</table>
+		<div class="row">
+			<div class="col-sm-6">
+				<form th:action="@{/logout}" method="post">
+					<input type="submit" class="btn btn-primary btn-lg" value="Sign Out"/>
+				</form>
+			</div>
+			<div class="col-sm-6">
+				<a th:href="@{/user}" class="btn btn-primary btn-lg">New User</a>
+			</div>
+
+		</div>
+
+	</div>
+</body>
+</html>

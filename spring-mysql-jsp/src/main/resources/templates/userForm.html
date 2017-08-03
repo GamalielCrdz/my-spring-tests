@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous" />
+
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+<meta charset="UTF-8" />
+<title>userform</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<h1>Add New User</h1>
+			<form th:action="@{/user/addUser}" class="form-horizontal"
+				th:object="${user}">
+				<div class="form-group">
+					<label th:text="${'User Id:' + user.id}">Id:</label> <input
+						th:field="*{id}" class="form-control label label-default"
+						readonly="readonly" />
+				</div>
+
+				<div class="form-group">
+					<label>Name:</label> <input type="text" placeholder="Name"
+						class="form-control" th:field="*{name}" />
+				</div>
+				<div class="form-group">
+					<label>Age:</label><input type="text" placeholder="Age"
+						class="form-control" th:field="*{age}" />
+				</div>
+				<div class="form-group">
+					<label>PhoneNumber:</label><input type="text"
+						placeholder="PhoneNumber" class="form-control"
+						th:field="*{phoneNumber}" />
+				</div>
+				<div class="form-group">
+					<label>Email:</label><input type="text" placeholder="Email"
+						class="form-control" th:field="*{email}" />
+				</div>
+				<div class="form-group">
+					<label>Country:</label> <select class="form-control"
+						th:field="*{country}">
+						<option value="0" disabled="disabled">Selecciona una opcion</option>
+						<option th:each="country: ${countries}" th:value="${country.id}"
+							th:text="${country.name}">Pais</option>
+
+					</select>
+				</div>
+				<input type="reset" th:action="@{/userList}" class="btn btn-danger"
+					value="Clean" /> <input type="submit" class="btn btn-success"
+					value="Add"></input>
+			</form>
+		</div>
+		<a th:href="@{/userList}" class="btn btn-danger pull-right">Cancel</a>
+
+	</div>
+</body>
+</html>
